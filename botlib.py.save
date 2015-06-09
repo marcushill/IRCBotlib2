@@ -144,8 +144,6 @@ class IRCBotProtocol(asyncio.Protocol):
 
     def end(self):
         self.sock.close()
-        self.stopper.set()
-        self.loop.stop()
 
     def data_received(self, data):
         ircmsg = data.decode('utf-8').strip('\n\r')
@@ -158,6 +156,8 @@ class IRCBotProtocol(asyncio.Protocol):
 
     def connection_lost(self, exc):
         print('Connection closed')
+        self.stopper.set()
+        self.loop.stop()
 
 
 def create_bot(config, loop):
@@ -184,15 +184,15 @@ def event_manager(queue, events, stopper):
 
 
 def process_signal(pipe, bot):
-    print('Waiting for signal')
-    sig = pipe.recv()
+    sig = pipe.recv().decode('utf-8').strip('\n\r')
     print("Recieved Signal: ", sig)
     if sig == 'kill':
-        bot.end()
+        bot.close()
 
 
 def start_bot(config, r, w):
-    sys.stdout = open(w, 'a')
+    # Create a pair of connected sockets
+    #sys.stdout = open(w, 'w')
     with open(config) as f:
         loop = asyncio.get_event_loop()
         config = json.load(f)
@@ -201,7 +201,7 @@ def start_bot(config, r, w):
         sock.connect((config['server'], 6667))
     coro = loop.create_connection(lambda: bot, sock=sock)
     asyncio.async(coro)
-    loop.add_reader(r, process_signal, r, bot)
+    loop.add_reader(r.fileno(), process_signal, r, bot)
     asyncio.async(event_manager)
     loop.run_forever()
     loop.close()

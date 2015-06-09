@@ -1,0 +1,57 @@
+{
+    "nick": "The_Seahorse",
+    "ident": "The Seahorse",
+    "channel": "#ADTRANCOOPS",
+    "server": "irc.freenode.net",
+    "triggers": [
+        {
+            "pattern": "^:(?P<nick>\\w+)!~*(?P<real>[\\w :@\\-\\.]+)\\s*PRIVMSG\\s*#(?P<channel>\\w+)\\s*:(?P<message>.*)$",
+            "nick": [
+                "Magic_Conch",
+                "mhill",
+                "The_Magic_Conch"
+            ],
+            "message": [
+                ".*Follow the seahorse.*"
+            ],
+            "isAction": true,
+            "responses": [
+                "goes to Glove World",
+                "goes to Rock Bottom",
+                "goes to Patrick's Rock",
+                "goes to Sandy's Dome",
+                "goes to Chum Bucket",
+                "goes to Goo Lagoon",
+                "goes to The Salty Spitoon",
+                "goes to Weenie Hut Jr's",
+                "goes to Super Weenie Hut Jr's",
+                "goes to Weenie Hut General",
+                "goes to Monster Weenie Hut Jr's",
+                "goes to Jellyfish fields",
+                "goes to The Sea Needle",
+                "goes to Industrial Park",
+                "goes to Krusty Towers",
+                "goes to Spongebob's Pineapple",
+                "goes to The Gift Shop",
+                "goes to Squidward's House",
+                "goes to Kelp Forrest",
+                "goes to Bargain Mart",
+                "goes to the Perfume Department"
+            ]
+        },
+        {
+            "pattern": "^:(?P<nick>\\w+)!~*(?P<real>[\\w :@\\-\\.]+)\\s*PRIVMSG\\s*(.*):(?P<message>.*)$",
+            "nick": [
+                "mhill"
+            ],
+            "message": [
+                "\\s*quit\\s*"
+            ],
+            "isAction": false,
+            "isCommand": true,
+            "responses": [
+                "quit"
+            ]
+        }
+    ]
+}

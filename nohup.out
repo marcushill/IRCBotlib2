@@ -1,0 +1,29 @@
+Started
+Started
+Started
+Started
+Started
+Process Process-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/multiprocessing/process.py", line 254, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.4/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/mhill/spongebob_bots/botlib.py", line 195, in start_bot
+    sys.stdout = open(w, 'a')
+FileNotFoundError: [Errno 2] No such file or directory: 'logs/Magic_Conch.log'
+Process Process-2:
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/multiprocessing/process.py", line 254, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.4/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/mhill/spongebob_bots/botlib.py", line 195, in start_bot
+    sys.stdout = open(w, 'a')
+FileNotFoundError: [Errno 2] No such file or directory: 'logs/Seahorse.log'
+Started
+Started
+Started
+Started
+Started
+Started
